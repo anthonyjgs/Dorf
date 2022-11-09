@@ -7,30 +7,31 @@ using UnityEngine;
 
 // Creates an interface, which holds only abstract functions
 // IState is the state interface, allowing us to create IState objects (like a play state, or a game over state)
-public interface IState
+public abstract class State
 {
-    void Enter();
-    void Execute();
-    void Exit();
+    public abstract void Enter(StateMachine machine);
+    public abstract void Execute(StateMachine machine);
+    public abstract void Exit(StateMachine machine);
 }
 
 // Implements StateMachine with the IState interface, requiring StateMachine to implement definitions for the functions within IState
 public class StateMachine : MonoBehaviour
 {
     // Create an empty variable to hold our current state
-    IState currentState;
-    
+    private State currentState;
+
     // Create an empty list for using a stateStack NOT YET IMPLEMENTED
     // List<IState> stateStack;
-    public void ChangeState(IState newState)
+
+    public void ChangeState(State newState)
     {
-        if (currentState != null) currentState.Exit();
+        if (currentState != null) currentState.Exit(this);
         currentState = newState;
-        currentState.Enter();
+        currentState.Enter(this);
     }
 
     public void Update()
     {
-        if (currentState != null) currentState.Execute();
+        if (currentState != null) currentState.Execute(this);
     }
 }

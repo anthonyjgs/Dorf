@@ -316,6 +316,10 @@ GameObject:
   - component: {fileID: 1102665544}
   - component: {fileID: 1102665546}
   - component: {fileID: 1102665547}
+  - component: {fileID: 1102665548}
+  - component: {fileID: 1102665549}
+  - component: {fileID: 1102665550}
+  - component: {fileID: 1102665551}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -384,8 +388,8 @@ Transform:
   m_GameObject: {fileID: 1102665541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -401,8 +405,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.31
-  m_Radius: 0.09
+  m_Height: 0.96
+  m_Radius: 0.36
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.01
@@ -420,9 +424,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7673f33b5d7c61439a8d1eb6201513b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpHeight: 1
-  gravity: -9.8
+  moveInput: 0
+  jumpInput: 0
+  moveSpeed: 6
+  jumpPower: 12
+  gravity: -25
+--- !u!114 &1102665548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102665541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c48d217e81f2bec419d273de4e62bd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1102665549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102665541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf5c8ed04f86c849ac279f8f76af065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1102665550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102665541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e05482e0b05363c4fa7fbc025a7e60ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackInput: 0
+  attacks:
+  - {fileID: 0}
+--- !u!95 &1102665551
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102665541}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 50197310f9b5686419307267e227bf64, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1661380339
 GameObject:
   m_ObjectHideFlags: 0
