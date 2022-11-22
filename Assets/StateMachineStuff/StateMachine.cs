@@ -30,7 +30,7 @@ public class StateMachine : MonoBehaviour
         currentState.Enter(this);
     }
 
-    public void Update()
+    public void Execute()
     {
         if (currentState != null) currentState.Execute(this);
     }

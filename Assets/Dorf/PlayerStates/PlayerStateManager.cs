@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    PlayerPlayState playState = new PlayerPlayState();
+    private PlayerPlayState playState = new PlayerPlayState();
     private StateMachine stateMachine;
 
     private void Start()
@@ -17,6 +17,6 @@ public class PlayerStateManager : MonoBehaviour
 
     private void Update()
     {
-        stateMachine.Update();
+        stateMachine.Execute();
     }
 }

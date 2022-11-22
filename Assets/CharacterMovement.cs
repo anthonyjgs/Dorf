@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour
     private CharacterController controller;
     private float baseScale;
     private Vector3 velocity;
-    private bool grounded;
+    public bool grounded;
 
     // Inputs to be accessed by other scripts
     public float moveInput; // From -1 to 1
@@ -21,12 +21,22 @@ public class CharacterMovement : MonoBehaviour
     public float jumpPower = 1.0f;
     public float gravity = -9.8f;
 
+    // Footstep Stuff
+    public AudioSource audioSource;
+    public AudioClip walkSound;
+    private float footstepTimer = 0f;
+    public float footstepRate = 0.5f;
+    public bool pitchShift = true;
+    public float shiftAmount = 1.0f;
+    private float basePitch;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
         baseScale = transform.localScale.x;
+
+        basePitch = audioSource.pitch;
     }
 
     // Update is called once per frame
@@ -34,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
     {
         // If grounded, reset y velocity, if y velocity is positive, then we may be trying to jump and want to skip this
         grounded = controller.isGrounded;
-        if (grounded && velocity.y !> 0) velocity.y = 0f;
+        if (grounded && velocity.y < 0) velocity.y = 0f;
 
 
         // Apply force of gravity, but let jumping override it for the first frame (inside ApplyInputs()), falling can be different speed
@@ -59,10 +69,25 @@ public class CharacterMovement : MonoBehaviour
         // Then apply horizontal movement
         velocity.x = moveInput * moveSpeed;
 
+        // If grounded and moving, play footstep sound
+        footstepTimer -= Time.deltaTime;
+        if (moveInput != 0 && grounded && footstepTimer <= 0)
+        {
+            footstepTimer = footstepRate;
+            audioSource.clip = walkSound;
+            if (pitchShift) audioSource.pitch = Random.Range(basePitch - shiftAmount, basePitch + shiftAmount);
+            audioSource.Play();
+        }
+
         // Flip player to match desired direction of movement
         float yScale = transform.localScale.y;
         float zScale = transform.localScale.z;
         if (moveInput < 0) transform.localScale = new(-baseScale, yScale, zScale);
         else if (moveInput > 0) transform.localScale = new(baseScale, yScale, zScale);
+    }
+
+    public void ApplyKnockback(float strength, Vector2 direction)
+    {
+        // TODO**************************************************
     }
 }
