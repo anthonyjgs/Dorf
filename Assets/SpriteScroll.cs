@@ -14,6 +14,6 @@ public class SpriteScroll : MonoBehaviour
 
     private void Update()
     {
-        rend.material.mainTextureOffset += new Vector2(scrollSpeed * Time.deltaTime * 1/transform.localScale.x, 0);
+        rend.material.mainTextureOffset += new Vector2(scrollSpeed * Time.deltaTime * 1 / transform.localScale.x, 0);
     }
 }

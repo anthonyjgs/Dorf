@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4530931591802092685}
   - component: {fileID: 8084764917727954624}
-  - component: {fileID: 8161533194707936036}
+  - component: {fileID: 8695696321061328734}
   m_Layer: 0
   m_Name: HurtBox
   m_TagString: Untagged
@@ -44,9 +44,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8161533194707936036
+  m_Size: {x: 1.4, y: 1.5, z: 1}
+  m_Center: {x: -0.7, y: 0.25, z: 0}
+--- !u!114 &8695696321061328734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,7 +55,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8138690938827483812}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6abfa1ecfdf4c634094d48d8634d40f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 818dd2f57145f88428d157f15a97a5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 8084764917727954624}
+  currentAttack: {fileID: 0}
+  attackDirection: {x: 1, y: 0, z: 0}

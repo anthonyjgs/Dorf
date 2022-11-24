@@ -10,9 +10,12 @@ public class CharacterHealth : MonoBehaviour
     public UnityEvent OnDeath;
     public CharacterMovement mover;
 
+    [SerializeField] private AudioSource hurtSource;
+
     public void ApplyDamage(float damage)
     {
         health -= damage;
+        if (hurtSource != null) hurtSource.Play();
         if (health <= 0) OnDeath?.Invoke();
     }
 

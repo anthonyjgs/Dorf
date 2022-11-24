@@ -36,7 +36,7 @@ public class CharacterMovement : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
         baseScale = transform.localScale.x;
 
-        basePitch = audioSource.pitch;
+        if (audioSource != null) basePitch = audioSource.pitch;
     }
 
     // Update is called once per frame
@@ -70,13 +70,16 @@ public class CharacterMovement : MonoBehaviour
         velocity.x = moveInput * moveSpeed;
 
         // If grounded and moving, play footstep sound
-        footstepTimer -= Time.deltaTime;
-        if (moveInput != 0 && grounded && footstepTimer <= 0)
+        if (audioSource != null)
         {
-            footstepTimer = footstepRate;
-            audioSource.clip = walkSound;
-            if (pitchShift) audioSource.pitch = Random.Range(basePitch - shiftAmount, basePitch + shiftAmount);
-            audioSource.Play();
+            footstepTimer -= Time.deltaTime;
+            if (moveInput != 0 && grounded && footstepTimer <= 0)
+            {
+                footstepTimer = footstepRate;
+                audioSource.clip = walkSound;
+                if (pitchShift) audioSource.pitch = Random.Range(basePitch - shiftAmount, basePitch + shiftAmount);
+                audioSource.Play();
+            }
         }
 
         // Flip player to match desired direction of movement
