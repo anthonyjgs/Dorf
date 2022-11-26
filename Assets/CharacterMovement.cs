@@ -89,8 +89,10 @@ public class CharacterMovement : MonoBehaviour
         else if (moveInput > 0) transform.localScale = new(baseScale, yScale, zScale);
     }
 
-    public void ApplyKnockback(float strength, Vector2 direction)
+    public void ApplyKnockback(Vector3 force)
     {
         // TODO**************************************************
+        velocity.x += force.x;
+        velocity.y += force.y;
     }
 }

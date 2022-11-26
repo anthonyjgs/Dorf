@@ -20,15 +20,17 @@ public class CharacterHealth : MonoBehaviour
     }
 
     // TODO ##################################################
-    public void ApplyKnockback(float force, Vector3 direction)
+    public void ApplyKnockback(Vector3 force)
     {
+        // If the object has a mover component
         if (mover != null)
         {
-
+            mover.ApplyKnockback(force);
         }
+        // If the object has a rigidbody component instead
         else if (gameObject.TryGetComponent(out Rigidbody rb))
         {
-
+            rb.AddForce(force);
         }
     }
 }

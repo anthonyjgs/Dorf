@@ -22,7 +22,7 @@ public class HitBox : MonoBehaviour
         {
             CharacterHealth otherHealth = other.gameObject.GetComponent<CharacterHealth>();
             otherHealth.ApplyDamage(currentAttack.damage);
-            otherHealth.ApplyKnockback(currentAttack.knockback, attackDirection);
+            otherHealth.ApplyKnockback(currentAttack.knockback * attackDirection);
             hitObjects.Add(other.gameObject);
         }
     }

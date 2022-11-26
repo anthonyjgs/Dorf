@@ -106,7 +106,7 @@ public class CharacterAttacker : MonoBehaviour
                 if (currentObject.TryGetComponent(out CharacterHealth objHealth))
                 {
                     objHealth.ApplyDamage(attacks[attackIndex].damage);
-                    objHealth.ApplyKnockback(attacks[attackIndex].knockback, /* Put the direction here! Replace this -->*/ Vector3.right);
+                    objHealth.ApplyKnockback(attacks[attackIndex].knockback * /* Put the direction here! Replace this -->*/ Vector3.right);
                     if (hitSound != null && audioSource != null) audioSource.PlayOneShot(hitSound);
                 }
             }
