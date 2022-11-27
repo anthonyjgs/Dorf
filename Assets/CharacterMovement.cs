@@ -14,7 +14,6 @@ public class CharacterMovement : MonoBehaviour
     public bool grounded;
 
     // Inputs to be accessed by other scripts
-    public float moveInput; // From -1 to 1
     public bool jumpInput; // True means this character should jump
 
     public float moveSpeed = 2.0f;
@@ -50,15 +49,15 @@ public class CharacterMovement : MonoBehaviour
         // Apply force of gravity, but let jumping override it for the first frame (inside ApplyInputs()), falling can be different speed
         velocity.y += gravity * Time.deltaTime;
 
-        // Read any input values set by external scripts, and apply them
-        ApplyInputs();
-
         // Move the character based on it's velocity values
         controller.Move(velocity * Time.deltaTime);
     }
 
-    private void ApplyInputs()
+    public void ApplyInputs(float moveInput)
     {
+        // Input is measured on scale of -1 to 1
+        Mathf.Clamp(moveInput, -1.0f, 1.0f);
+
         // First, apply jumping if able
         if (jumpInput && grounded)
         {

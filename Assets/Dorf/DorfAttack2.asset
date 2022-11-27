@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9acf61de0b7f9294c9e9678c9870a3fd, type: 3}
   m_Name: DorfAttack2
   m_EditorClassIdentifier: 
-  damage: 5
-  knockback: 20
+  damage: 20
+  knockback: 6
   hitSize: {x: 1.3, y: 1.5, z: 1}
   hitOrigin: {x: 0.6, y: 0.25, z: 0}
   animationString: anim_DorfAttack2

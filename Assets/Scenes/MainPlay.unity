@@ -139,6 +139,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3558029331369692422, guid: 784c8a2917c37f6409e2f8da4f31d2cb, type: 3}
+      propertyPath: mover
+      value: 
+      objectReference: {fileID: 1920395287}
+    - target: {fileID: 3558029331369692422, guid: 784c8a2917c37f6409e2f8da4f31d2cb, type: 3}
       propertyPath: hurtSource
       value: 
       objectReference: {fileID: 2071009341}
@@ -792,7 +796,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grounded: 0
-  moveInput: 0
   jumpInput: 0
   moveSpeed: 6
   jumpPower: 12
@@ -6287,6 +6290,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1920395287 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5870372490014554438, guid: 784c8a2917c37f6409e2f8da4f31d2cb, type: 3}
+  m_PrefabInstance: {fileID: 36521632}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7673f33b5d7c61439a8d1eb6201513b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2071009339
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ public class CharacterAttacker : MonoBehaviour
 
     private Attack currentAttack;
     private bool hurtActive = false;
+    private float knockHeightBonus = 1.0f;
 
     private void Start()
     {
@@ -105,8 +106,14 @@ public class CharacterAttacker : MonoBehaviour
                 // Apply damage and knockback to the current object
                 if (currentObject.TryGetComponent(out CharacterHealth objHealth))
                 {
+                    // Setting up the attack direction for knockback
+                    Vector3 attackDirection = (currentObject.transform.position - gameObject.transform.position);
+                    attackDirection.Normalize();
+                    attackDirection.y += knockHeightBonus;
+                    objHealth.ApplyKnockback(attacks[attackIndex].knockback * attackDirection);
+                    
                     objHealth.ApplyDamage(attacks[attackIndex].damage);
-                    objHealth.ApplyKnockback(attacks[attackIndex].knockback * /* Put the direction here! Replace this -->*/ Vector3.right);
+                    
                     if (hitSound != null && audioSource != null) audioSource.PlayOneShot(hitSound);
                 }
             }

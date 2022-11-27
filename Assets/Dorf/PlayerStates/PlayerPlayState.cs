@@ -25,7 +25,7 @@ public class PlayerPlayState : State
         float moveInput = Input.GetAxis("Horizontal");
         animator.SetFloat("moveInput", Mathf.Abs(moveInput));
         animator.SetBool("grounded", mover.grounded);
-        mover.moveInput = moveInput;
+        mover.ApplyInputs(moveInput);
         if (Input.GetButtonDown("Jump")) mover.jumpInput = true;
 
         // Attack

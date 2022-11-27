@@ -5,12 +5,19 @@ using UnityEngine.Events;
 
 public class CharacterHealth : MonoBehaviour
 {
-    public float maxHealth = 100;
-    public float health = 100;
+    [SerializeField] private float maxHealth = 100;
+    [SerializeField] private float health = 100;
+    [SerializeField] private float knockbackDampening = 1.0f;
+
     public UnityEvent OnDeath;
     public CharacterMovement mover;
 
     [SerializeField] private AudioSource hurtSource;
+
+    private void Start()
+    {
+        if (mover == null) mover = gameObject.GetComponent<CharacterMovement>();
+    }
 
     public void ApplyDamage(float damage)
     {
@@ -25,6 +32,7 @@ public class CharacterHealth : MonoBehaviour
         // If the object has a mover component
         if (mover != null)
         {
+            force *= (maxHealth / health) * knockbackDampening;
             mover.ApplyKnockback(force);
         }
         // If the object has a rigidbody component instead
