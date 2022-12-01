@@ -9,6 +9,7 @@ public class PlayerPlayState : State
     [SerializeField] private CharacterMovement mover;
     [SerializeField] private CharacterAttacker attacker;
     [SerializeField] private Animator animator;
+    [SerializeField] private CharacterHealth health;
 
     // Gets called when this state is initialized
     public override void Enter(StateMachine machine)
@@ -18,6 +19,7 @@ public class PlayerPlayState : State
         mover = player.GetComponent<CharacterMovement>();
         attacker = player.GetComponent<CharacterAttacker>();
         animator = player.GetComponent<Animator>();
+        health = player.GetComponent<CharacterHealth>();
     }
 
     public override void Execute(StateMachine machine)
@@ -25,7 +27,8 @@ public class PlayerPlayState : State
         float moveInput = Input.GetAxis("Horizontal");
         animator.SetFloat("moveInput", Mathf.Abs(moveInput));
         animator.SetBool("grounded", mover.grounded);
-        mover.ApplyInputs(moveInput);
+        mover.canChangeDirection = !attacker.isDirectionLocked;
+        if (!health.stunned) mover.ApplyInputs(moveInput);
         if (Input.GetButtonDown("Jump")) mover.jumpInput = true;
 
         // Attack
@@ -33,8 +36,6 @@ public class PlayerPlayState : State
         {
             attacker.UseAttack();
         }
-
-        // If health hits zero, transition to dead state.
 
 
         //DEBUG

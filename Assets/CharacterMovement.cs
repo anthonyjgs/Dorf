@@ -12,10 +12,12 @@ public class CharacterMovement : MonoBehaviour
     private float baseScale;
     private Vector3 velocity;
     public bool grounded;
+    [SerializeField] private bool airMovement = true;
+
 
     // Inputs to be accessed by other scripts
     public bool jumpInput; // True means this character should jump
-
+    public bool canChangeDirection = true; // Disable during attacking
     public float moveSpeed = 2.0f;
     public float jumpPower = 1.0f;
     public float gravity = -9.8f;
@@ -41,11 +43,6 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // If grounded, reset y velocity, if y velocity is positive, then we may be trying to jump and want to skip this
-        grounded = controller.isGrounded;
-        if (grounded && velocity.y < 0) velocity.y = 0f;
-
-
         // Apply force of gravity, but let jumping override it for the first frame (inside ApplyInputs()), falling can be different speed
         velocity.y += gravity * Time.deltaTime;
 
@@ -66,7 +63,11 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // Then apply horizontal movement
-        velocity.x = moveInput * moveSpeed;
+        float moveAmount = moveInput * moveSpeed;
+        if (airMovement || grounded)
+        {
+            velocity.x = moveAmount;
+        }
 
         // If grounded and moving, play footstep sound
         if (audioSource != null)
@@ -82,10 +83,20 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // Flip player to match desired direction of movement
-        float yScale = transform.localScale.y;
-        float zScale = transform.localScale.z;
-        if (moveInput < 0) transform.localScale = new(-baseScale, yScale, zScale);
-        else if (moveInput > 0) transform.localScale = new(baseScale, yScale, zScale);
+        if (canChangeDirection)
+        {       
+            float yScale = transform.localScale.y;
+            float zScale = transform.localScale.z;
+            if (moveInput < 0) transform.localScale = new(-baseScale, yScale, zScale);
+            else if (moveInput > 0) transform.localScale = new(baseScale, yScale, zScale);
+        }
+    }
+
+    void LateUpdate()
+    {
+        // If grounded, reset y velocity, if y velocity is positive, then we may be trying to jump and want to skip this
+        grounded = controller.isGrounded;
+        if (grounded && velocity.y < 0) velocity.y = 0f;
     }
 
     public void ApplyKnockback(Vector3 force)

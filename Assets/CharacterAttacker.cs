@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class CharacterAttacker : MonoBehaviour
 {
     private bool isAttacking = false;
     private bool attackQueued = false;
+    public bool isDirectionLocked = false;
     private CollisionTracker colTracker;
     private List<GameObject> damagedObjects = new List<GameObject>();
     [SerializeField] private Animator animator;
@@ -16,12 +14,11 @@ public class CharacterAttacker : MonoBehaviour
 
     // Attacks to use
     [SerializeField] private Attack[] attacks;
-    [SerializeField] private bool attackChain = true; // Will attacks be in a chain order, or random?
     private int attackIndex = 0;
 
     private Attack currentAttack;
     private bool hurtActive = false;
-    private float knockHeightBonus = 1.0f;
+    [SerializeField] private float knockHeightBonus = 1.0f;
 
     private void Start()
     {
@@ -45,6 +42,7 @@ public class CharacterAttacker : MonoBehaviour
         if (!isAttacking)
         {
             isAttacking = true;
+            isDirectionLocked = true;
             attackIndex = 0;
             currentAttack = attacks[attackIndex];
             animator.Play(currentAttack.animationString);
@@ -64,6 +62,7 @@ public class CharacterAttacker : MonoBehaviour
             currentAttack = attacks[attackIndex];
             animator.Play(currentAttack.animationString);
             attackQueued = false;
+            isDirectionLocked = true;
         }
         else
         {
@@ -83,6 +82,7 @@ public class CharacterAttacker : MonoBehaviour
     {
         hurtActive = false;
         damagedObjects.Clear();
+        isDirectionLocked = false;
     }
 
     // Overlap box that deals damage once per gameObject
