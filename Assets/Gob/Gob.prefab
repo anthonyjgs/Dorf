@@ -504,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29283e217e60e5d4db6f30f04228cc17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEffect: {fileID: 5550132424668716030, guid: 3cb6235cb81d79d4c9b214375fef773d, type: 3}
 --- !u!114 &2041960683
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class GobOutBounds : MonoBehaviour
 {
+    [SerializeField] private GameObject deathEffect;
+    
     public void Die()
     {
+        Instantiate<GameObject>(deathEffect, transform);
         Destroy(gameObject);
     }
 }

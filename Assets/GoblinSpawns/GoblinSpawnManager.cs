@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class GoblinSpawnManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private GoblinSpawner[] spawners;
+    [SerializeField] private float baseTime = 5.0f;
+    [SerializeField] private float timeModifier = 0.95f;
+    private float timer;
+
+    void Awake(){timer = baseTime;}
+    
     void Start()
     {
-        
+        spawners = GetComponentsInChildren<GoblinSpawner>();
     }
 
-    // Update is called once per frame
+    // Spawn gobbos faster and faster over time
     void Update()
     {
-        
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            int spawnIndex = Random.Range(0, spawners.Length);
+            Debug.Log(spawnIndex);
+            spawners[spawnIndex].Spawn();
+            baseTime *= timeModifier;
+            timer = baseTime;
+        }
     }
 }

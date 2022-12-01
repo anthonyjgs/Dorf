@@ -40,15 +40,13 @@ public class GobLiveState : State
         animator.SetBool("isHurting", stunned);
         if (mover.grounded && !stunned) {
             // Calculate movement input and apply
-            float targetDistanceX = target.transform.position.x - goblin.transform.position.x;
-            float moveInput;
-            if (Mathf.Abs(targetDistanceX) > attackRange)
+            Vector3 vectorToTarget = (target.transform.position - goblin.transform.position);
+            float targetDistance = vectorToTarget.magnitude;
+            float relativeXDistance = vectorToTarget.x;
+            float moveInput = Mathf.Clamp(relativeXDistance, -1.0f, 1.0f);
+            if (targetDistance < attackRange)
             {
-                moveInput = Mathf.Clamp(targetDistanceX, -1.0f, 1.0f);
-            }
-            else
-            {
-                moveInput = 0;
+                moveInput *= 0.1f;
                 // Attack!
                 attacker.UseAttack();
             }

@@ -102,7 +102,7 @@ public class CharacterMovement : MonoBehaviour
     public void ApplyKnockback(Vector3 force)
     {
         // TODO**************************************************
-        velocity.x += force.x;
-        velocity.y += force.y;
+        velocity.x = force.x;
+        velocity.y = force.y;
     }
 }
