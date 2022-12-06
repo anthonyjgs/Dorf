@@ -44,7 +44,7 @@ public class GobLiveState : State
             float targetDistance = vectorToTarget.magnitude;
             float relativeXDistance = vectorToTarget.x;
             float moveInput = Mathf.Clamp(relativeXDistance, -1.0f, 1.0f);
-            if (targetDistance < attackRange)
+            if (targetDistance < attackRange && !attacker.isAttacking)
             {
                 moveInput *= 0.1f;
                 // Attack!

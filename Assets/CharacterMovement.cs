@@ -105,4 +105,10 @@ public class CharacterMovement : MonoBehaviour
         velocity.x = force.x;
         velocity.y = force.y;
     }
+
+
+    public Vector3 getVelocity()
+    {
+        return velocity;
+    }
 }

@@ -8,7 +8,14 @@ public class GobOutBounds : MonoBehaviour
     
     public void Die()
     {
-        Instantiate<GameObject>(deathEffect, transform);
+        Vector3 pos = transform.position;
+        // TODO -- MAKE THIS BASED ON Direction of boundary hit!
+        CharacterMovement mover = GetComponent<CharacterMovement>();
+        Quaternion rot = Quaternion.LookRotation(mover.getVelocity());
+        Instantiate<GameObject>(deathEffect, pos, rot);
+
+        // Increment the player's score
+        ScoreTracker.AddScore(1);
         Destroy(gameObject);
     }
 }

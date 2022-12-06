@@ -517,6 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05482e0b05363c4fa7fbc025a7e60ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
   isDirectionLocked: 0
   animator: {fileID: 7371243148565411755}
   hitSound: {fileID: 0}

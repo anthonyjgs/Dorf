@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CharacterAttacker : MonoBehaviour
 {
-    private bool isAttacking = false;
+    public bool isAttacking = false;
     private bool attackQueued = false;
     public bool isDirectionLocked = false;
     private CollisionTracker colTracker;

@@ -6,20 +6,18 @@ public class GobDeathEffect : MonoBehaviour
 {
     [SerializeField] private AudioClip[] DeathClips;
     [SerializeField] private AudioSource audioSource;
-    private bool playedSound = false;
+    [SerializeField] private AudioClip wilhelm;
+    [SerializeField, Range(0, 100)] private int wilhelmPercentChance = 5;
 
     private void Awake()
     {
         AudioClip deathClip = DeathClips[Random.Range(0, DeathClips.Length)];
         if (audioSource == null) audioSource = GetComponent<AudioSource>();
         audioSource.clip = deathClip;
-    }
+        audioSource.Play();
+        // You know what this is.
+        if (Random.Range(0, 101) <= wilhelmPercentChance) audioSource.PlayOneShot(wilhelm);
 
-    void LateUpdate()
-    {
-        if (!audioSource.isPlaying)
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject, 2.0f);
     }
 }
