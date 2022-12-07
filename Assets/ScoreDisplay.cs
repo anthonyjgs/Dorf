@@ -5,16 +5,17 @@ public class ScoreDisplay : MonoBehaviour
 {
     private Text text;
     private int currentScore;
+    [SerializeField] private ScoreTracker scoreTracker;
 
     void Start()
     {
         text = GetComponent<Text>();
-        text.text = ScoreTracker.SCORE.ToString();
+        text.text = scoreTracker.SCORE.ToString();
     }
 
     void Update()
     {
-        int newScore = ScoreTracker.SCORE;
+        int newScore = scoreTracker.SCORE;
         if (newScore != currentScore)
         {
             currentScore = newScore;

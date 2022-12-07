@@ -11,12 +11,15 @@ public class GoblinSpawnManager : MonoBehaviour
     private int gobsThisWave;
     private bool active = true;
 
+    private ScoreTracker scoreTracker;
+
     void Awake(){timer = baseTime;}
     
     void Start()
     {
         spawners = GetComponentsInChildren<GoblinSpawner>();
-        gobsThisWave = ScoreTracker.SCORETONEXTWAVE;
+        scoreTracker = GameObject.Find("Player").GetComponent<ScoreTracker>();
+        gobsThisWave = scoreTracker.SCORETONEXTWAVE;
     }
 
     // Spawn gobbos faster and faster over time
@@ -45,7 +48,7 @@ public class GoblinSpawnManager : MonoBehaviour
     // Called from the gameState class
     public void Resume()
     {
-        gobsThisWave = ScoreTracker.SCORETONEXTWAVE - ScoreTracker.GetScore();
+        gobsThisWave = scoreTracker.SCORETONEXTWAVE - scoreTracker.GetScore();
         baseTime *= timeModifier;
         timer = baseTime;
         active = true;

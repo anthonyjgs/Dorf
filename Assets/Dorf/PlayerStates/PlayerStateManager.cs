@@ -13,6 +13,7 @@ public class PlayerStateManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("PlayerStateUpdating");
         stateMachine.Execute();
     }
 }

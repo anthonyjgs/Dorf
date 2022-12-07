@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreTracker : MonoBehaviour
 {
-    public static int SCORE;
-    public static int WAVE;
-    public static int SCORETONEXTWAVE;
+    public int SCORE;
+    public int WAVE;
+    public int SCORETONEXTWAVE;
 
     public GameState gameState;
 
@@ -39,6 +37,6 @@ public class ScoreTracker : MonoBehaviour
     {
         WAVE += 1;
         SCORETONEXTWAVE += 5 * WAVE;
-        gameState
+        gameState.gameStateMachine.ChangeState(gameState.gameNewWaveState);
     }
 }

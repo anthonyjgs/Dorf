@@ -21,8 +21,9 @@ public class GameState : MonoBehaviour
         gameStateMachine.ChangeState(gamePlayState);
     }
 
-    private void update()
+    private void Update()
     {
+        Debug.Log("GameStateUpdating");
         gameStateMachine.Execute();
     }
 }

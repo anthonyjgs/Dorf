@@ -7,20 +7,24 @@ public class NewWaveState : State
     CharacterHealth playerHealthComp;
     GameObject newWaveUI;
 
+    private ScoreTracker scoreTracker;
+
     public override void Enter(StateMachine stateMachine)
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
         
-        // Restore player's health
+        // Restore player's health and grab scoreTracker off of the player
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealthComp = player.GetComponent<CharacterHealth>();
 
         playerHealthComp.health = playerHealthComp.maxHealth;
 
+        scoreTracker = player.GetComponent<ScoreTracker>();
+
         // Display new wave UI
         newWaveUI = stateMachine.gameObject.GetComponent<GameState>().newWaveUI;
         Text textComponent = newWaveUI.transform.GetChild(2).GetComponent<Text>();
-        textComponent.text = ("WAVE: " + ScoreTracker.WAVE);
+        textComponent.text = ("WAVE: " + scoreTracker.WAVE);
         newWaveUI.SetActive(true);
     }
 

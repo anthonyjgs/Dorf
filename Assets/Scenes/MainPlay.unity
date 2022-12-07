@@ -1411,7 +1411,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &998523536
 MonoBehaviour:
@@ -1425,6 +1425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364f3bcbea0a063468405e0d455ebb2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStateMachine: {fileID: 0}
   newWaveUI: {fileID: 1398371954}
 --- !u!4 &998523537
 Transform:
@@ -1857,6 +1858,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c4adff5cfba68499a9a0a30314796a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SCORE: 0
+  WAVE: 0
+  SCORETONEXTWAVE: 0
+  gameState: {fileID: 998523536}
 --- !u!1 &1139147330
 GameObject:
   m_ObjectHideFlags: 0
@@ -8219,7 +8224,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 1.4, y: 1.7, z: 0}
+    m_Position: {x: 1.4, y: 1.8, z: -1}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1.66, y: 1, z: 1}
     placementMode: 0
@@ -12499,6 +12504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e981253e6f8be5740bd69661b9af62ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreTracker: {fileID: 1102665558}
 --- !u!1 &2136116168
 GameObject:
   m_ObjectHideFlags: 0

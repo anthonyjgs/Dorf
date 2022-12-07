@@ -5,6 +5,7 @@ using UnityEngine;
 public class GobOutBounds : MonoBehaviour
 {
     [SerializeField] private GameObject deathEffect;
+    ScoreTracker scoreTracker;
     
     public void Die()
     {
@@ -14,8 +15,12 @@ public class GobOutBounds : MonoBehaviour
         Quaternion rot = Quaternion.LookRotation(mover.getVelocity());
         Instantiate<GameObject>(deathEffect, pos, rot);
 
+
+        GameObject player = GameObject.Find("Player");
+        scoreTracker = player.GetComponent<ScoreTracker>();
+        
         // Increment the player's score
-        ScoreTracker.AddScore(1);
+        scoreTracker.AddScore(1);
         Destroy(gameObject);
     }
 }
