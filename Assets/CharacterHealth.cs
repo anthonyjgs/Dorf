@@ -16,6 +16,8 @@ public class CharacterHealth : MonoBehaviour
     public UnityEvent OnDeath;
     public CharacterMovement mover;
 
+    public float powerHitThresh = 10;
+
     [SerializeField] private AudioSource hurtSource;
     [SerializeField] private AudioSource powerHitSource;
 
@@ -52,7 +54,7 @@ public class CharacterHealth : MonoBehaviour
             mover.grounded = false;
 
             // If it's particularly strong, play the powerhit sound
-            if (powerHitSource && force.magnitude > 20)
+            if (powerHitSource && force.magnitude > powerHitThresh)
             {
                 powerHitSource.Play();
             }

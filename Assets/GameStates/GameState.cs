@@ -9,6 +9,11 @@ public class GameState : MonoBehaviour
     public GameOverState gameOverState = new GameOverState();
 
     public GameObject newWaveUI;
+    public GameObject gameOverUI;
+
+    public AudioSource audioSource;
+    public AudioClip gameOverClip;
+    public AudioClip newWaveClip;
 
     private void Awake()
     {
@@ -23,7 +28,6 @@ public class GameState : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("GameStateUpdating");
         gameStateMachine.Execute();
     }
 }

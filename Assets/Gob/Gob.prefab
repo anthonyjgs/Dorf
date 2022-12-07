@@ -435,8 +435,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   mover: {fileID: 5870372490014554438}
-  hurtSource: {fileID: 2071009341}
-  powerHitSource: {fileID: 2074366484}
+  powerHitThresh: 5
+  hurtSource: {fileID: 0}
+  powerHitSource: {fileID: 2071009341}
 --- !u!114 &4554348565855819870
 MonoBehaviour:
   m_ObjectHideFlags: 0

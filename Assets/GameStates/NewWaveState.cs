@@ -6,6 +6,7 @@ public class NewWaveState : State
     GameObject player;
     CharacterHealth playerHealthComp;
     GameObject newWaveUI;
+    GameState gameState;
 
     private ScoreTracker scoreTracker;
 
@@ -26,15 +27,17 @@ public class NewWaveState : State
         Text textComponent = newWaveUI.transform.GetChild(2).GetComponent<Text>();
         textComponent.text = ("WAVE: " + scoreTracker.WAVE);
         newWaveUI.SetActive(true);
+
+        // Sound effect
+        gameState = stateMachine.gameObject.GetComponent<GameState>();
+        gameState.audioSource.PlayOneShot(gameState.newWaveClip);
     }
 
     public override void Execute(StateMachine stateMachine)
     {
-        Debug.Log("New Wave State Execute is called");
         if (Input.GetButtonDown("Attack"))
         {
-            Debug.Log("Input Received!");
-            stateMachine.ChangeState(stateMachine.gameObject.GetComponent<GameState>().gamePlayState);
+            stateMachine.ChangeState(gameState.gamePlayState);
         }
     }
 

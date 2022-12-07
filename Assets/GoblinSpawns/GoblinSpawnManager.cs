@@ -9,7 +9,7 @@ public class GoblinSpawnManager : MonoBehaviour
     [SerializeField] private float timeModifier = 0.8f;
     private float timer;
     private int gobsThisWave;
-    private bool active = true;
+    public bool active = true;
 
     private ScoreTracker scoreTracker;
 
@@ -48,7 +48,7 @@ public class GoblinSpawnManager : MonoBehaviour
     // Called from the gameState class
     public void Resume()
     {
-        gobsThisWave = scoreTracker.SCORETONEXTWAVE - scoreTracker.GetScore();
+        gobsThisWave = scoreTracker.SCORETONEXTWAVE - scoreTracker.SCORE;
         baseTime *= timeModifier;
         timer = baseTime;
         active = true;

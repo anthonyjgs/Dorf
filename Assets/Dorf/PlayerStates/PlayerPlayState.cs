@@ -11,6 +11,9 @@ public class PlayerPlayState : State
     [SerializeField] private Animator animator;
     [SerializeField] private CharacterHealth health;
 
+    float jumpBuffer = 0.2f;
+    float jumpTimer = 0f;
+
     // Gets called when this state is initialized
     public override void Enter(StateMachine machine)
     {
@@ -29,7 +32,23 @@ public class PlayerPlayState : State
         animator.SetBool("grounded", mover.grounded);
         mover.canChangeDirection = !attacker.isDirectionLocked;
         if (!health.stunned) mover.ApplyInputs(moveInput);
-        if (Input.GetButtonDown("Jump")) mover.jumpInput = true;
+        
+        if (mover.jumpInput == true)
+        {
+            jumpTimer -= Time.deltaTime;
+            if (jumpTimer <= 0)
+            {
+                mover.jumpInput = false;
+            }
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            mover.jumpInput = true;
+            jumpTimer = jumpBuffer;
+        }
+
+
 
         // Attack
         if (Input.GetButtonDown("Attack"))

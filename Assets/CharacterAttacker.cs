@@ -77,6 +77,13 @@ public class CharacterAttacker : MonoBehaviour
 
     }
 
+    public void InterruptAttack()
+    {
+        DeactivateHitBox();
+        attackQueued = false;
+        EndAttack();
+    }
+
     // Called by an animation event when an attack can no longer deal damage
     public void DeactivateHitBox()
     {

@@ -37,6 +37,7 @@ public class GobLiveState : State
     public override void Execute(StateMachine machine)
     {
         stunned = health.stunned;
+        if (stunned && attacker.isAttacking) attacker.InterruptAttack();
         animator.SetBool("isHurting", stunned);
         if (mover.grounded && !stunned) {
             // Calculate movement input and apply
