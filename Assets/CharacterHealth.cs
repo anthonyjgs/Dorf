@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class CharacterHealth : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 100;
-    [SerializeField] private float health = 100;
+    [SerializeField] public float maxHealth = 100;
+    [SerializeField] public float health = 100;
     [SerializeField] private float knockbackDampening = 1.0f;
 
     [SerializeField] private bool isStunnable = false;
@@ -41,7 +41,7 @@ public class CharacterHealth : MonoBehaviour
         else if (isStunnable) Stun();
     }
 
-    // TODO ##################################################
+
     public void ApplyKnockback(Vector3 force)
     {
         // If the object has a mover component
@@ -51,7 +51,6 @@ public class CharacterHealth : MonoBehaviour
             mover.ApplyKnockback(force);
             mover.grounded = false;
 
-            Debug.Log(force.magnitude);
             // If it's particularly strong, play the powerhit sound
             if (powerHitSource && force.magnitude > 20)
             {

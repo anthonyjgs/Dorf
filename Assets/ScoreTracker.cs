@@ -7,22 +7,26 @@ public class ScoreTracker : MonoBehaviour
     public static int SCORE;
     public static int WAVE;
     public static int SCORETONEXTWAVE;
+
+    public GameState gameState;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (gameState == null) Debug.LogException(new System.Exception("ScoreTracker is missing it's gameState reference!"));
         SCORE = 0;
         WAVE = 1;
         SCORETONEXTWAVE = 10;
     }
 
     // Safer way to access score from other scripts
-    public static int GetScore()
+    public int GetScore()
     {
         return SCORE;
     }
 
     // Increments score and performs necessary checks
-    public static int AddScore(int score){
+    public int AddScore(int score){
         SCORE += score;
         if (SCORE >= SCORETONEXTWAVE)
         {
@@ -31,9 +35,10 @@ public class ScoreTracker : MonoBehaviour
         return SCORE;
     }
 
-    static void NextWave()
+    void NextWave()
     {
         WAVE += 1;
         SCORETONEXTWAVE += 5 * WAVE;
+        gameState
     }
 }

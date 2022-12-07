@@ -19,7 +19,6 @@ public class PlayerDeadState : State
         animator = player.GetComponent<Animator>();
 
         animator.SetBool("isDead", true);
-        Time.timeScale = 0.1f;
     }
 
     public override void Execute(StateMachine machine)

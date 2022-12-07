@@ -36,10 +36,6 @@ public class PlayerPlayState : State
         {
             attacker.UseAttack();
         }
-
-
-        //DEBUG
-        if (Input.GetButtonDown("Fire2")) animator.SetBool("isDead", true);
     }
 
     public override void Exit(StateMachine machine)
