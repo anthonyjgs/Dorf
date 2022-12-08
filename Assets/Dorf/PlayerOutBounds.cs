@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerOutBounds : MonoBehaviour
 {
     PlayerDeadState deadState = new PlayerDeadState();
+    private bool isDead = false;
     public void gotoDeadState()
     {
-        StateMachine stateMachine = gameObject.GetComponent<StateMachine>();
-        if (stateMachine.currentState != deadState);
+        if (isDead == false)
         {
+            isDead = true;
+            StateMachine stateMachine = gameObject.GetComponent<StateMachine>();
             stateMachine.ChangeState(deadState);
         }
     }
