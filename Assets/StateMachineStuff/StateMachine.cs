@@ -18,7 +18,7 @@ public abstract class State
 public class StateMachine : MonoBehaviour
 {
     // Create an empty variable to hold our current state
-    private State currentState;
+    public State currentState;
 
     // Create an empty list for using a stateStack NOT YET IMPLEMENTED
     // List<IState> stateStack;

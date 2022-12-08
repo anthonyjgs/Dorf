@@ -8,6 +8,9 @@ public class PlayerOutBounds : MonoBehaviour
     public void gotoDeadState()
     {
         StateMachine stateMachine = gameObject.GetComponent<StateMachine>();
-        stateMachine.ChangeState(deadState);
+        if (stateMachine.currentState != deadState);
+        {
+            stateMachine.ChangeState(deadState);
+        }
     }
 }
