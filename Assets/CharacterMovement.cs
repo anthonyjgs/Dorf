@@ -20,6 +20,8 @@ public class CharacterMovement : MonoBehaviour
     public bool canChangeDirection = true; // Disable during attacking
     public float moveSpeed = 2.0f;
     public float jumpPower = 1.0f;
+    public float jumpCooldown = 0.5f;
+    public bool canJump = true;
     public float gravity = -9.8f;
 
     // Footstep Stuff
@@ -56,10 +58,13 @@ public class CharacterMovement : MonoBehaviour
         Mathf.Clamp(moveInput, -1.0f, 1.0f);
 
         // First, apply jumping if able
-        if (jumpInput && grounded)
+        if (jumpInput && grounded && canJump)
         {
             velocity.y = jumpPower;
+            grounded = false;
             jumpInput = false;
+            canJump = false;
+            CanJump();
         }
 
         // Then apply horizontal movement
@@ -101,7 +106,6 @@ public class CharacterMovement : MonoBehaviour
 
     public void ApplyKnockback(Vector3 force)
     {
-        // TODO**************************************************
         velocity.x = force.x;
         velocity.y = force.y;
     }
@@ -110,5 +114,19 @@ public class CharacterMovement : MonoBehaviour
     public Vector3 getVelocity()
     {
         return velocity;
+    }
+
+    private void CanJump()
+    {
+        StartCoroutine(CanJumpRoutine());
+    }
+
+    private IEnumerator CanJumpRoutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        while (!grounded) yield return new WaitWhile(() => grounded == false);
+        
+        yield return new WaitForSeconds(jumpCooldown);
+        canJump = true;
     }
 }

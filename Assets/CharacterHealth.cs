@@ -12,6 +12,9 @@ public class CharacterHealth : MonoBehaviour
     [SerializeField] private float stunTime = 0.5f;
     private float stunTimer = 0.0f;
     public bool stunned = false;
+    public bool hasHitImmunity = false;
+    public float immunityTime = 0.7f;
+    private float immunityTimer = 0f;
     public CharacterMovement mover;
 
     public float powerHitThresh = 10;
@@ -34,19 +37,23 @@ public class CharacterHealth : MonoBehaviour
             stunTimer -= Time.deltaTime;
             if (stunTimer <= 0) stunned = false;
         }
+        if (immunityTimer >= 0) immunityTimer -= Time.deltaTime;
     }
 
     public void ApplyDamage(float damage)
     {
+        if (immunityTimer > 0 && hasHitImmunity) return;
         health -= damage;
         if (hurtSource != null) hurtSource.Play();
         if (isStunnable) Stun();
         Flash(3);
+        immunityTimer = immunityTime;
     }
 
 
     public void ApplyKnockback(Vector3 force)
     {
+        if (immunityTimer > 0 && hasHitImmunity) return;
         // If the object has a mover component
         if (mover != null)
         {

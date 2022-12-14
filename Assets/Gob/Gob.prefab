@@ -408,6 +408,8 @@ MonoBehaviour:
   canChangeDirection: 1
   moveSpeed: 2
   jumpPower: 1
+  jumpCooldown: 0.5
+  canJump: 1
   gravity: -25
   audioSource: {fileID: 0}
   walkSound: {fileID: 0}
@@ -432,9 +434,8 @@ MonoBehaviour:
   isStunnable: 1
   stunTime: 0.5
   stunned: 0
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
+  hasHitImmunity: 0
+  immunityTime: 0.7
   mover: {fileID: 5870372490014554438}
   powerHitThresh: 5
   hurtSource: {fileID: 0}
@@ -477,7 +478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftBound: -10
   rightBound: 10
-  upBound: 10
+  upBound: 6
   downBound: -3.5
   OnExitBoundary:
     m_PersistentCalls:

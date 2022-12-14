@@ -119,7 +119,10 @@ public class CharacterAttacker : MonoBehaviour
                 if (currentObject.TryGetComponent(out CharacterHealth objHealth))
                 {
                     // Setting up the attack direction for knockback
-                    Vector3 attackDirection = (currentObject.transform.position - gameObject.transform.position);
+                    float normalizedScale = gameObject.transform.localScale.x;
+                    if (normalizedScale < 0) normalizedScale = -1;
+                    else normalizedScale = 1;
+                    Vector3 attackDirection = new Vector3(normalizedScale, currentObject.transform.position.y - gameObject.transform.position.y, 0);
                     attackDirection.Normalize();
                     attackDirection.y += knockHeightBonus;
                     objHealth.ApplyKnockback(attacks[attackIndex].knockback * attackDirection);
