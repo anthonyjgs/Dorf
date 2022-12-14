@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   knockback: 6
-  hitSize: {x: 1.3, y: 1.5, z: 1}
+  hitSize: {x: 1, y: 1.5, z: 1}
   hitOrigin: {x: 0.6, y: 0.25, z: 0}
   animationString: anim_DorfAttack2

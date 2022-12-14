@@ -23,7 +23,7 @@ public class CharacterAttacker : MonoBehaviour
     private void Start()
     {
         animator = gameObject.GetComponent<Animator>();
-        audioSource = gameObject.GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,7 +31,8 @@ public class CharacterAttacker : MonoBehaviour
     {
         if (hurtActive == true)
         {
-            CheckHitBox();
+            if (isAttacking == false) hurtActive = false;
+            else CheckHitBox();
         }
     }
 
@@ -73,15 +74,19 @@ public class CharacterAttacker : MonoBehaviour
     // Called by an animation event when an attack can deal damage
     public void ActivateHitBox()
     {
-        hurtActive = true;
-
+        if (isAttacking == true)
+        {
+            hurtActive = true;
+        }
     }
 
     public void InterruptAttack()
     {
         DeactivateHitBox();
+        isAttacking = false;
         attackQueued = false;
-        EndAttack();
+        hurtActive = false;
+
     }
 
     // Called by an animation event when an attack can no longer deal damage
@@ -122,6 +127,11 @@ public class CharacterAttacker : MonoBehaviour
                     objHealth.ApplyDamage(attacks[attackIndex].damage);
                     
                     if (hitSound != null && audioSource != null) audioSource.PlayOneShot(hitSound);
+                }
+                if (currentObject.TryGetComponent(out CharacterAttacker objAttacker))
+                {
+                    objAttacker.hurtActive = false;
+                    objAttacker.InterruptAttack();
                 }
             }
         }

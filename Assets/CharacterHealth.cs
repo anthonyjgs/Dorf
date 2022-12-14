@@ -1,25 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class CharacterHealth : MonoBehaviour
 {
     [SerializeField] public float maxHealth = 100;
     [SerializeField] public float health = 100;
-    [SerializeField] private float knockbackDampening = 1.0f;
+    [SerializeField] private float knockbackMultiplier = 1.0f;
 
     [SerializeField] private bool isStunnable = false;
     [SerializeField] private float stunTime = 0.5f;
     private float stunTimer = 0.0f;
     public bool stunned = false;
-    public UnityEvent OnDeath;
     public CharacterMovement mover;
 
     public float powerHitThresh = 10;
 
     [SerializeField] private AudioSource hurtSource;
     [SerializeField] private AudioSource powerHitSource;
+
+    private Coroutine flashCoroutine;
+    private Color flashColor = Color.red;
 
     private void Awake()
     {
@@ -39,8 +40,8 @@ public class CharacterHealth : MonoBehaviour
     {
         health -= damage;
         if (hurtSource != null) hurtSource.Play();
-        if (health <= 0) OnDeath?.Invoke();
-        else if (isStunnable) Stun();
+        if (isStunnable) Stun();
+        Flash(3);
     }
 
 
@@ -49,7 +50,7 @@ public class CharacterHealth : MonoBehaviour
         // If the object has a mover component
         if (mover != null)
         {
-            force *= ((maxHealth + 1) - health)  / knockbackDampening;
+            force *= ((maxHealth - health)/100) * knockbackMultiplier;
             mover.ApplyKnockback(force);
             mover.grounded = false;
 
@@ -70,5 +71,28 @@ public class CharacterHealth : MonoBehaviour
     {
         stunned = true;
         stunTimer = stunTime;
+    }
+
+    private void Flash(int numberOfFlashes)
+    {
+        if (flashCoroutine != null) StopCoroutine(flashCoroutine);
+        flashCoroutine = StartCoroutine(FlashCoroutine(numberOfFlashes));
+    }
+
+    private IEnumerator FlashCoroutine(int numberOfFlashes)
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        float lerpAmount = Mathf.Clamp01(health/maxHealth);
+        Color lerpedColor = Color.Lerp(flashColor, Color.yellow, lerpAmount);
+
+        for (int i = 0; i < numberOfFlashes; i++)
+        {
+            renderer.material.color = lerpedColor;
+            yield return new WaitForSeconds(0.1f);
+            renderer.material.color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+            i++;
+        }
+        flashCoroutine = null;
     }
 }

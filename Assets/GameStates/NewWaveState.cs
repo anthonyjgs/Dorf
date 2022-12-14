@@ -35,7 +35,7 @@ public class NewWaveState : State
 
     public override void Execute(StateMachine stateMachine)
     {
-        if (Input.GetButtonDown("Attack"))
+        if (Input.GetButtonDown("Submit"))
         {
             stateMachine.ChangeState(gameState.gamePlayState);
         }

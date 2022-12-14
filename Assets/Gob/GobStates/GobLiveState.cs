@@ -22,6 +22,9 @@ public class GobLiveState : State
     [SerializeField] private Animator animator;
     [SerializeField] private CharacterHealth health;
 
+    private GameState gameState;
+    private bool inPlay;
+
         // Gets called when this state is initialized
     public override void Enter(StateMachine machine)
     {
@@ -32,6 +35,8 @@ public class GobLiveState : State
         animator = goblin.GetComponent<Animator>();
         health = goblin.GetComponent<CharacterHealth>();
         target = GameObject.Find("Player");
+        gameState = GameObject.Find("GameStateManager").GetComponent<GameState>();
+
     }
 
     public override void Execute(StateMachine machine)
@@ -39,7 +44,10 @@ public class GobLiveState : State
         stunned = health.stunned;
         if (stunned && attacker.isAttacking) attacker.InterruptAttack();
         animator.SetBool("isHurting", stunned);
-        if (mover.grounded && !stunned) {
+        inPlay = (gameState.gameStateMachine.currentState == gameState.gamePlayState);
+
+        if (mover.grounded && !stunned && inPlay == true)
+        {
             // Calculate movement input and apply
             Vector3 vectorToTarget = (target.transform.position - goblin.transform.position);
             float targetDistance = vectorToTarget.magnitude;
@@ -53,6 +61,11 @@ public class GobLiveState : State
             }
             animator.SetFloat("moveSpeed", Mathf.Abs(moveInput));
             mover.ApplyInputs(moveInput);
+        }
+        else if (inPlay == false)
+        {
+            animator.SetFloat("moveSpeed", 0);
+            mover.ApplyInputs(0.0f);
         }
     }
 

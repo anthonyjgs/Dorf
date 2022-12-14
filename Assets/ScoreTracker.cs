@@ -25,6 +25,9 @@ public class ScoreTracker : MonoBehaviour
 
     // Increments score and performs necessary checks
     public int AddScore(int score){
+        // Don't add score if game over
+        if (gameState.gameStateMachine.currentState == gameState.gameOverState) return SCORE;
+
         SCORE += score;
         if (SCORE >= SCORETONEXTWAVE)
         {
